@@ -94,7 +94,7 @@ int showSetting() {
 
 		}
 		system("cls");
-		setting();
+		showSetting();
 		break;
 	}
 	case 2:
@@ -146,7 +146,7 @@ int showSetting() {
 
 		}
 		system("cls");
-		setting();
+		showSetting();
 		break;
 	}
 	case 3:
@@ -185,18 +185,39 @@ int showSetting() {
 
 		}
 		system("cls");
-		setting();
+		showSetting();
 		break;
 	}
 	default:
 	{
 		system("cls");
 		cout << "[!] Неправильные данные, попробуйте еще раз!\n\n";
-		setting();
+		showSetting();
 		break;
 	}
 	}
 	return 0;
+}
+
+int showRules() {
+	system("cls");
+	cout << "[+] Правила викторины:\n\n[+] Суть викторины состоит в проверке знаний в разных областях знаний.";
+	cout << "\n[+] Начав викторину, вы увидете вопрос, к нему дано 4 варианта ответа.";
+	cout << "\n[+] Выберите любой вариант из представленных. Вы сразу узнаете, правильный был ваш ответ или нет.";
+	cout << "\n[+] В настройках можете настроить количество вопросов, а также выбрать наличие подсказки.";
+	cout << "\n[+] Подсказка (50х50) дается всего одна на игру, используйте с умом!";
+	cout << "\n[+] Хорошей игры!!";
+	cout << "\n\n[0] Выход";
+	cout << "\n\n[+] Выберите пункт: ";
+	int menuRules;
+	cin >> menuRules;
+	while (menuRules != 0) {
+		cout << "\n\n[+] Выберите пункт: ";
+		cin >> menuRules;
+	}
+	if (menuRules == 0) {
+		return 0;
+	}
 }
 
 struct Question{
@@ -311,10 +332,10 @@ int startGame() {
 int main() {
 	setlocale(0, "");
 	srand(static_cast<unsigned int>(time(0)));
-	cout << "[+] Викторина!\n\n[1] Начать игру\n[2] Настройки\n\n[0] Выход\n\n[+] Выберите пункт: ";
+	cout << "[+] Викторина!\n\n[1] Начать игру\n[2] Настройки\n[3] Правила\n\n[0] Выход\n\n[+] Выберите пункт: ";
 	int menu;
 	cin >> menu;
-	while (menu > 2 || menu < 0) {
+	while (menu > 3 || menu < 0) {
 		cout << "[+] Выберите пункт: ";
 		cin >> menu;
 	}
@@ -332,6 +353,13 @@ int main() {
 	case 2:
 	{
 		showSetting();
+		system("cls");
+		main();
+		break;
+	}
+	case 3:
+	{
+		showRules();
 		system("cls");
 		main();
 		break;
