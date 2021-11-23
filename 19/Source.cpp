@@ -35,16 +35,20 @@ int randomArr(int QuestionArr[], int arr) {
 	return 0;
 }
 
-int setting() {
+int showSetting() {
 	system("cls");
 	cout << "[+] Настройки\n\n";
 	cout << "[1] Количество вопросов: " << qtyAnswer << "\n";
 	cout << "[2] Количество жизней: " << qtyLive << "\n";
-	cout << "[3] Наличие подсказки : " << hint << "\n";
+	cout << "[3] Наличие подсказки : " << hint << "\n\n";
 	cout << "[0] Назад\n\n";
 	cout << "[+] Выберите пункт: ";
 	int menuSetting;
 	cin >> menuSetting;
+	while (menuSetting > 3 || menuSetting < 0) {
+		cout << "[+] Выберите пункт: ";
+		cin >> menuSetting;
+	}
 	switch (menuSetting) {
 	case 0:
 	{
@@ -57,6 +61,10 @@ int setting() {
 		cout << "[+] Количество вопросов\n\n[1] 5 вопросов\n[2] 10 вопросов\n[3] 15 вопросов\n\n[0] Назад\n\n[+] Выберите пункт: ";
 		int menuAnswer;
 		cin >> menuAnswer;
+		while (menuAnswer > 3 || menuAnswer < 0) {
+			cout << "[+] Выберите пункт: ";
+			cin >> menuAnswer;
+		}
 		switch (menuAnswer) {
 		case 0:
 		{
@@ -95,6 +103,10 @@ int setting() {
 		cout << "[+] Количество жизней\n\n[1] 1 жизнь\n[2] 2 жизни\n[3] 3 жизни\n[4] 4 жизни\n[5] 5 жизней\n\n[0] Назад\n\n[+] Выберите пункт: ";
 		int menuLive;
 		cin >> menuLive;
+		while (menuLive > 5 || menuLive < 0) {
+			cout << "[+] Выберите пункт: ";
+			cin >> menuLive;
+		}
 		switch (menuLive) {
 		case 0:
 		{
@@ -143,6 +155,10 @@ int setting() {
 		cout << "[+] Наличие подсказки\n\n[1] Да\n[2] Нет\n\n[0] Назад\n\n[+] Выберите пункт: ";
 		int menuHint;
 		cin >> menuHint;
+		while (menuHint > 2 || menuHint < 0) {
+			cout << "[+] Выберите пункт: ";
+			cin >> menuHint;
+		}
 		switch (menuHint) {
 		case 0:
 		{
@@ -174,7 +190,9 @@ int setting() {
 	}
 	default:
 	{
-		return 0;
+		system("cls");
+		cout << "[!] Неправильные данные, попробуйте еще раз!\n\n";
+		setting();
 		break;
 	}
 	}
@@ -225,6 +243,10 @@ int startGame() {
 		cout << "\n\n[+] Ответ: ";
 		int answer;
 		cin >> answer;
+		while (answer > 4) {
+			cout << "\n\n[+] Ответ: ";
+			cin >> answer;
+		}
 		if (answer == 0) {
 			cout << "\n\n\x1b[95m[!] Вы использовали подсказку!\x1b[0m";
 			int qtyUncorrectAnswer = 0;
@@ -246,6 +268,10 @@ int startGame() {
 			
 		cout << "\n\n[+] Ответ: ";
 		cin >> answer;
+		while (answer > 4) {
+			cout << "\n\n[+] Ответ: ";
+			cin >> answer;
+		}
 		qtyHint = 0;
 		}
 		if (questions[questionArr[i]-1].answer[answerArr[answer-1]-1] == questions[questionArr[i]-1].correct) {
@@ -284,10 +310,14 @@ int startGame() {
 
 int main() {
 	setlocale(0, "");
+	srand(static_cast<unsigned int>(time(0)));
 	cout << "[+] Викторина!\n\n[1] Начать игру\n[2] Настройки\n\n[0] Выход\n\n[+] Выберите пункт: ";
 	int menu;
 	cin >> menu;
-
+	while (menu > 2 || menu < 0) {
+		cout << "[+] Выберите пункт: ";
+		cin >> menu;
+	}
 	switch (menu) {
 	case 0:
 	{
@@ -301,14 +331,16 @@ int main() {
 	}
 	case 2:
 	{
-		setting();
+		showSetting();
 		system("cls");
 		main();
 		break;
 	}
 	default:
 	{
-		return 0;
+		cout << "[!] Вы ввели некорректные данные";
+		system("cls");
+		main();
 		break;
 	}
 	}
